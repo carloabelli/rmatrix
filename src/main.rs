@@ -83,18 +83,18 @@ fn main() {
             let num_new_columns = width - columns.len();
             columns.extend(
                 (0..num_new_columns)
-                    .map(|_| Column::with_wait(rng.gen_range(0, DEFAULT_MAX_GAP_LENGTH + 1))),
+                    .map(|_| Column::with_wait(rng.gen_range(0..=DEFAULT_MAX_GAP_LENGTH))),
             );
         }
 
         for (i, column) in columns.iter_mut().enumerate() {
             if column.wait == 0 {
                 let length: u16 =
-                    rng.gen_range(DEFAULT_MIN_TRAIL_LENGTH, DEFAULT_MAX_TRAIL_LENGTH + 1);
+                    rng.gen_range(DEFAULT_MIN_TRAIL_LENGTH..=DEFAULT_MAX_TRAIL_LENGTH);
                 let trail = Trail::new(length);
                 column.trails.push_back(trail);
                 column.wait =
-                    length + rng.gen_range(DEFAULT_MIN_GAP_LENGTH, DEFAULT_MAX_GAP_LENGTH + 1);
+                    length + rng.gen_range(DEFAULT_MIN_GAP_LENGTH..=DEFAULT_MAX_GAP_LENGTH);
             } else {
                 column.wait -= 1;
             }

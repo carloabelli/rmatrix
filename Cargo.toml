@@ -6,5 +6,5 @@ edition = "2018"
 
 [dependencies]
 ctrlc = "3.1"
-rand = "0.7"
+rand = "0.8"
 termion = "1.5"
